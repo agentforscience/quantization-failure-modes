@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "stages": {
+    "resource_finder": {
+      "success": true,
+      "skipped": true
+    },
+    "experiment_runner": {
+      "success": true,
+      "return_code": 0,
+      "elapsed_time": 17569.20326757431,
+      "log_file": "/data/summereunann/neurico-workspaces/quantization_failure_modes_20261020_001002_i9j0k1l2/logs/execution_claude.log",
+      "transcript_file": "/data/summereunann/neurico-workspaces/quantization_failure_modes_20261020_001002_i9j0k1l2/logs/execution_claude_transcript.jsonl",
+      "background_processes_terminated": false
+    }
+  },
+  "work_dir": "/data/summereunann/neurico-workspaces/quantization_failure_modes_20261020_001002_i9j0k1l2"
+}

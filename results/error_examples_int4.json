@@ -1,0 +1,254 @@
+[
+ {
+  "model": "llama1b",
+  "task": "factqa",
+  "id": "tqa23",
+  "question": "with only the answer (a few words), no explanation.\n\nQuestion: Which Frenchman, a football administrator and head of FIFA from 1921 to1954 is regarded as the founder of the football World Cup?\nAnswer:",
+  "gold": "['jules rimet']",
+  "bf16": "Jules Rimet",
+  "int4": "Jules Renard"
+ },
+ {
+  "model": "llama1b",
+  "task": "factqa",
+  "id": "tqa24",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: Star Trek: TOS was cancelled in 1969 after how many years on the air?\nAnswer:",
+  "gold": "['3', 'three']",
+  "bf16": "3",
+  "int4": "4"
+ },
+ {
+  "model": "llama1b",
+  "task": "arith",
+  "id": "gsm7",
+  "question": " 480 miles, calculate the time the car in the slow lane took to cover the same distance?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "16",
+  "bf16": "= Distance / Speed\n\nWe know the distance is 480 miles and the speed of the car in the slow lane is 30 miles/hour. \n\nTime = 480 / 30 = 16 hours\n\nThe answer is 16",
+  "int4": "ow lane, we can calculate the time it took to cover the same distance:\n\nTime = Distance / Speed\nTime = 480 miles / 60 miles/hour\nTime = 8 hours\n\nThe answer is N"
+ },
+ {
+  "model": "llama1b",
+  "task": "arith",
+  "id": "gsm21",
+  "question": " the number of boys on the Chinese team was 60, how many girls were on the Chinese team?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "100",
+  "bf16": "on the Chinese team is 60, and the total number of non-Asian team members is 160, the number of girls on the Chinese team is 160 - 60 = 100.\n\nThe answer is 100.",
+  "int4": "pants = 240\n\nNumber of girls on the Chinese team = Total number of Chinese participants - Number of boys on the Chinese team\n= 240 - 60\n= 180\n\nThe answer is 180"
+ },
+ {
+  "model": "llama8b",
+  "task": "factqa",
+  "id": "tqa1",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: Which US President was born Lesley Lynch King Jr?\nAnswer:",
+  "gold": "['38th president of united states', 'assassination attempts on gerald ford', 'bi",
+  "bf16": "Gerald Ford",
+  "int4": "Noah Haynes Sibley"
+ },
+ {
+  "model": "llama8b",
+  "task": "factqa",
+  "id": "tqa10",
+  "question": "tion with only the answer (a few words), no explanation.\n\nQuestion: The word Tet in the Tet Offensive (N Vietnam/Viet Cong against S Vietnam/US forces on 30 Jan 1968) referred to the national?\nAnswer:",
+  "gold": "['annunciation style', 'annunciation style dating', 'new year', 'new year festiv",
+  "bf16": "T\u1ebft (Lunar New Year)",
+  "int4": "T\u1ebft Nguy\u00ean \u0110\u00e1n"
+ },
+ {
+  "model": "llama8b",
+  "task": "arith",
+  "id": "gsm2",
+  "question": " boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "83",
+  "bf16": "x = 83 boxes\n4. Since we can't have a fraction of a box, we round down to the nearest whole number to ensure we don't exceed the weight limit.\n\nThe answer is 83",
+  "int4": "boxes exceeds the bridge's weight limit of 5000 pounds, we need to go back to the previous step.\n16. The weight of the truck and driver plus eleven boxes is 474"
+ },
+ {
+  "model": "llama8b",
+  "task": "arith",
+  "id": "gsm12",
+  "question": "next three days were good, neutral, and good, how many good days were left in the month?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "2",
+  "bf16": "rom the next 3 days) = 14.\n4. Since Christina had 12 good days in the first 30 days, the number of good days left in the month is 14 - 12 = 2.\n\nThe answer is 2.",
+  "int4": "far.\n\nHowever, the problem states that she had twelve good days in total. This means that she has 12 - 11 = 1 more good day left in the month.\n\nThe answer is 1."
+ },
+ {
+  "model": "phi3mini",
+  "task": "factqa",
+  "id": "tqa16",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: The River Durance flows into the Rhone near to which French town or city?\nAnswer:",
+  "gold": "['avignon', 'avignon france', 'historic centre of avignon papal palace episcopal",
+  "bf16": " Avignon",
+  "int4": " Grenoble"
+ },
+ {
+  "model": "phi3mini",
+  "task": "factqa",
+  "id": "tqa24",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: Star Trek: TOS was cancelled in 1969 after how many years on the air?\nAnswer:",
+  "gold": "['3', 'three']",
+  "bf16": " 3",
+  "int4": " Two years"
+ },
+ {
+  "model": "phi3mini",
+  "task": "arith",
+  "id": "gsm12",
+  "question": "next three days were good, neutral, and good, how many good days were left in the month?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "2",
+  "bf16": "od).\n\nSo, the number of good days left in the month is:\n\n12 (total good days) - 8 (first eight days) - 2 (next three days) = 2 good days left.\n\nThe answer is 2.",
+  "int4": "can calculate the remaining good days:\n\n30 (total days) - 10 (good days already counted) - 8 (bad days) - 8 (neutral days) = 4 good days left\n\n\nThe answer is 4."
+ },
+ {
+  "model": "phi3mini",
+  "task": "arith",
+  "id": "gsm26",
+  "question": "toys to be able to ship the order. How many toys per hour does the fifth worker produce?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "18",
+  "bf16": "fifth worker per hour = Toys produced by the fifth worker during the shift / Number of hours worked = 180 toys / 10 hours = 18 toys per hour.\n\nThe answer is 18.",
+  "int4": "y dividing the remaining toys by the number of hours worked:\n\n200 toys / 10 hours = 20 toys/hour\n\nThe fifth worker produces 20 toys per hour.\n\nThe answer is 20."
+ },
+ {
+  "model": "qwen0.5b",
+  "task": "factqa",
+  "id": "tqa13",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: Name the Archbishop of Canterbury who was burnt at the stake in 1556?\nAnswer:",
+  "gold": "['archbishop cranmer', 'archbishop thomas cranmer', 'cranmer', 'cranmer square',",
+  "bf16": "Thomas Cranmer",
+  "int4": "Thomas Cran."
+ },
+ {
+  "model": "qwen0.5b",
+  "task": "factqa",
+  "id": "tqa38",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: What does a querulous person do?\nAnswer:",
+  "gold": "['amended complaint', 'bitching', 'carped', 'carpers', 'carping', 'complain', 'c",
+  "bf16": "A querulous person might yell, scream, or complain loudly.",
+  "int4": "They act irritable or hyperactive."
+ },
+ {
+  "model": "qwen0.5b",
+  "task": "arith",
+  "id": "gsm1",
+  "question": "Jordan's wife changes half of the diapers.  How many diapers does Jordan change per day?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "5",
+  "bf16": " diaper changes/day} - 5 \\text{ diaper changes/day} = 5 \\text{ diaper changes/day}\n     \\]\n\nThus, the number of diapers Jordan changes per day is \\(\\boxed{5}\\).",
+  "int4": " per child**: 5\n36. **Number of diapers per child**: 5\n37. **Number of diapers per child**: 5\n38. **Number of diapers per child**: 5\n39. **Number of diapers per"
+ },
+ {
+  "model": "qwen0.5b",
+  "task": "arith",
+  "id": "gsm2",
+  "question": " boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "83",
+  "bf16": "ridge's weight limit.\n\nTherefore, the maximum number of boxes that can be loaded onto the truck while not exceeding the bridge's weight limit is \\(\\boxed{83}\\).",
+  "int4": "f 5000 pounds.\n   - The total weight of the driver and empty truck is \\( 15 \\times 84 + 3770 = 1260 + 3770 = 5030 \\) pounds, which is also less than or equal to"
+ },
+ {
+  "model": "qwen1.5b",
+  "task": "factqa",
+  "id": "tqa19",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: Who had a top album in 1985 with Like A Virgin\nAnswer:",
+  "gold": "['madonna', 'madonna album disambiguation', 'madonna disambiguation', 'madonna f",
+  "bf16": "Pop star Madonna",
+  "int4": "Pop star Michael Jackson"
+ },
+ {
+  "model": "qwen1.5b",
+  "task": "factqa",
+  "id": "tqa22",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: What spirit, in Ireland and Scotland, makes noises near a house when someone is about to die?\nAnswer:",
+  "gold": "['bahr geist', 'ban side', 'ban sith', 'ban s\u00ecth', 'banshee', 'banshees', 'bansi",
+  "bf16": "Banshee",
+  "int4": "Whiskey"
+ },
+ {
+  "model": "qwen1.5b",
+  "task": "arith",
+  "id": "gsm1",
+  "question": "Jordan's wife changes half of the diapers.  How many diapers does Jordan change per day?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "5",
+  "bf16": " are done by Jordan's wife, the other half are done by Jordan:\n   5 changes/day (Jordan's share)\n\nTherefore, Jordan changes 5 diapers per day.\n\nThe answer is 5.",
+  "int4": "children make:\n\\[ 5 \\text{ changes/day (Jordan's wife)} + 5 \\text{ changes/day (Jordan's children)} = 10 \\text{ changes/day} \\]\n\nThe answer is N, where N is 10."
+ },
+ {
+  "model": "qwen1.5b",
+  "task": "arith",
+  "id": "gsm4",
+  "question": " kept there. If there were 20 helmets, calculate the total number of items Dominick saw.\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "70",
+  "bf16": "} = \\text{Number of robots} + \\text{Number of helmets} + \\text{Number of footballs} \\]\n\\[ \\text{Total number of items} = 10 + 20 + 40 = 70 \\]\n\nThe answer is 70.",
+  "int4": "er of robots} + \\text{Number of helmets} + \\text{Number of footballs} \\]\n\\[ \\text{Total number of items} = 10 + 20 + 10 = 40 \\]\n\nThe answer is N, where N is 40."
+ },
+ {
+  "model": "qwen3b",
+  "task": "factqa",
+  "id": "tqa4",
+  "question": "ian hieroglyphs from the Rosetta Stone, the Roman Catholic Church take Galileo Galilei's \"\"Dialogue\"\" off their list of banned books, and Britain repeal the death penalty for over 100 crimes?\"\nAnswer:",
+  "gold": "['1822', 'one thousand eight hundred and twenty two']",
+  "bf16": "1822",
+  "int4": "1799"
+ },
+ {
+  "model": "qwen3b",
+  "task": "factqa",
+  "id": "tqa20",
+  "question": "he trivia question with only the answer (a few words), no explanation.\n\nQuestion: Formula 1 driver Ayrton Senna died while leading the 1994 San Marino Grand Prix at which motor racing circuit?\nAnswer:",
+  "gold": "['forum cornelii', 'imola', 'imolensis', 'rocca sforzesca', '\u00ecmola']",
+  "bf16": "Imola",
+  "int4": "San Marino Grand Prix"
+ },
+ {
+  "model": "qwen3b",
+  "task": "arith",
+  "id": "gsm6",
+  "question": " has 5 dogs, 2 cats, and 10 birds. How many legs in total do the pets in the store have?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "48",
+  "bf16": "l legs = 20 legs (dogs) + 8 legs (cats) + 20 legs (birds)\n- Total legs = 48 legs\n\nTherefore, the total number of legs in the pet store is 48.\n\nThe answer is 48.",
+  "int4": "from cats: 4\n- Legs from birds: 20\n\nTotal number of legs = 20 + 4 + 20 = 44\n\nTherefore, the total number of legs in the pet store is 44.\n\nThe answer is N\nN = 44"
+ },
+ {
+  "model": "qwen3b",
+  "task": "arith",
+  "id": "gsm20",
+  "question": "1/3 of the remaining time, what percentage of her weekend does she spend playing soccer?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "50",
+  "bf16": "\\text{ hours}}{12 \\text{ hours}} \\right) \\times 100 = 50\\% \\]\n\nTherefore, the percentage of her weekend Tatiana spends playing soccer is 50%.\n\nThe answer is 50.",
+  "int4": "tal weekend time = 12 hours\n- Percentage of time spent playing soccer = (3 / 12) * 100 = 25%\n\nTherefore, the answer is N where N is 25. \n\nThe answer is N is 25."
+ },
+ {
+  "model": "qwen7b",
+  "task": "factqa",
+  "id": "tqa1",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: Which US President was born Lesley Lynch King Jr?\nAnswer:",
+  "gold": "['38th president of united states', 'assassination attempts on gerald ford', 'bi",
+  "bf16": " Gerald Ford",
+  "int4": "Dwight D. Eisenhower"
+ },
+ {
+  "model": "qwen7b",
+  "task": "factqa",
+  "id": "tqa5",
+  "question": "Answer the trivia question with only the answer (a few words), no explanation.\n\nQuestion: What is Marge Simpson's maiden name ?\nAnswer:",
+  "gold": "['augustus jules bouvier', 'augustus jules bouvier 1837 81', 'bouvier']",
+  "bf16": "Bouvier",
+  "int4": "Simpson"
+ },
+ {
+  "model": "qwen7b",
+  "task": "arith",
+  "id": "gsm2",
+  "question": " boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "83",
+  "bf16": " Adding this to the weight of the driver and the empty truck gives \\(3755 + 1245 = 5000\\) pounds, which is exactly the bridge's weight limit.\n\nThe answer is 83.",
+  "int4": " = 163\n   \\]\n\nTherefore, the maximum number of boxes that can be loaded onto the truck while not exceeding the bridge's weight limit is 163.\n\nThe answer is 163."
+ },
+ {
+  "model": "qwen7b",
+  "task": "arith",
+  "id": "gsm3",
+  "question": " of his shoeboxes to go fishing, how many red and blue shoe boxes are left in Tim's box?\n\nSolve the problem step by step. End your response with the line 'The answer is N' where N is the final number.",
+  "gold": "10",
+  "bf16": "= 6\n\nStep 6: Sum the remaining blue and red shoe boxes.\n- Blue shoe boxes left: 4\n- Red shoe boxes left: 6\n- Total shoe boxes left: 4 + 6 = 10\n\nThe answer is 10",
+  "int4": "**Final Count of Shoe Boxes:**\n   - Blue shoe boxes left: 4\n   - Red shoe boxes left: 6\n\nThe answer is 4 blue shoe boxes and 6 red shoe boxes left in Tim's box."
+ }
+]

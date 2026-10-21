@@ -1,0 +1,35 @@
+idea:
+  title: "Quantization Failure Modes: Task-Specific Accuracy Cliffs in Weight-Reduced Language Models"
+  description: >
+    Post-training quantization (INT8, INT4, GPTQ, AWQ) is widely used to
+    reduce model size, but accuracy degradation is not uniform across tasks.
+    Some tasks tolerate aggressive quantization while others hit sharp
+    accuracy cliffs. This study maps the task-specific failure landscape
+    of quantization across reasoning, factual recall, and generation tasks.
+
+    We quantize 3 model families (Qwen-2.5, Llama-3, Phi-3) at 4 precision
+    levels (FP16, INT8, INT4, 2-bit) and evaluate on 6 task types:
+    (1) arithmetic reasoning, (2) factual QA, (3) code generation,
+    (4) reading comprehension, (5) creative writing, and (6) instruction
+    following. For each combination we measure accuracy, output perplexity,
+    and token-level KL divergence from the FP16 baseline. We identify
+    "cliff tasks" where accuracy drops by more than 15% between adjacent
+    precision levels.
+
+    Use locally runnable models via Ollama. Write a computational paper
+    under 3000 words with 2-3 figures.
+  hypothesis: >
+    Arithmetic reasoning and factual QA are the most quantization-sensitive
+    tasks, showing cliff behavior between INT8 and INT4 (>15% accuracy drop).
+    Creative writing and reading comprehension are robust down to INT4.
+    Smaller models within a family show cliffs at higher precision than
+    larger models. KL divergence predicts cliff onset (threshold ~0.3 nats)
+    before accuracy visibly degrades.
+  domain: artificial_intelligence
+  references:
+    - "Dettmers et al. (2022) GPTQ: Accurate Post-Training Quantization for Generative Pre-Trained Transformers"
+    - "Lin et al. (2024) AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration"
+  metadata:
+    idea_id: quantization_failure_modes_20261020_001002_i9j0k1l2
+    created_at: "2026-10-20T00:10:02.000000"
+    status: submitted

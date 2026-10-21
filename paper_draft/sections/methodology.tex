@@ -1,0 +1,54 @@
+\section{Experimental Setup}
+\label{sec:method}
+
+\subsection{Problem formulation}
+Let $s_m^t(b)$ be the score of model $m$ on task $t$ when its weights are quantized to $b$ bits, with $b=16$ denoting the bf16 reference. We define the \newterm{retained fraction}
+\begin{equation}
+\ret_m^t(b) = s_m^t(b) / s_m^t(16).
+\end{equation}
+Following our pre-registered plan, a \newterm{cliff} is a drop in $\ret$ of more than 0.15 between two adjacent tested precisions. The \newterm{critical precision} $\bcrit_{m,t}$ is the highest tested $b$ with $\ret_m^t(b)<0.85$; a configuration with $\ret<0.85$ is called \newterm{broken}. For each configuration we also compute the token-level divergence
+\begin{equation}
+\KL\big(p_{16}\,\|\,p_b\big) = \frac{1}{|\gT|}\sum_{i\in\gT}\sum_{v} p_{16}(v\mid x_{<i}) \log\frac{p_{16}(v\mid x_{<i})}{p_b(v\mid x_{<i})},
+\end{equation}
+averaged over the response tokens $\gT$ of task-specific prompts. Here $p_{16}$ and $p_b$ are the bf16 and quantized next-token distributions under the same prefix.
+
+\subsection{Models and quantization}
+\para{Models.} We use seven instruction-tuned bf16 checkpoints: \qwen-Instruct 0.5B, 1.5B, 3B and 7B~\cite{qwen2025qwen25}, \textsc{Llama-3.2-1B-Instruct} and \textsc{Llama-3.1-8B-Instruct}~\cite{grattafiori2024llama3}, and \phithree-4k-Instruct (3.8B)~\cite{abdin2024phi3}. As a production reference, we add the official \qwen-3B/7B-Instruct-\awq INT4 checkpoints (group size 128). Quantization requires weight access, so all models run locally and no API models are involved.
+
+\para{Quantizer.} We apply weight-only, asymmetric min--max round-to-nearest quantization with group size 128 along the input dimension. It covers every linear layer inside the transformer blocks (attention q/k/v/o and MLP gate/up/down), while embeddings and the LM head stay in bf16, as in the \gptq and \awq evaluations. We use fake quantization: weights are rounded to the $2^b$-level grid of their group and de-quantized back to bf16, which is numerically what an INT-$b$ group-128 kernel computes. Unit tests check that every group has at most $2^b$ distinct values. We choose \rtn for two reasons. It needs no calibration data, which removes the choice of calibration set as a confound. It is also a pessimistic lower bound for better quantizers, which the \awq checkpoints let us quantify. For the granularity ablation (\secref{sec:granularity}) we also run per-output-channel \rtn without grouping, at 8/6/5/4/3 bits, for \qwen-1.5B and \llama-1B.
+
+\para{Precision levels.} Every model is run at bf16, 8, 6, 5, 4, 3 and 2 bits, except \phithree, which was run only at bf16, 4 and 3 bits because of GPU time constraints. All analyses use only the levels actually run, and cliffs are computed between adjacent \emph{tested} levels.
+
+\subsection{Tasks and metrics}
+\Tabref{tab:tasks} lists the six task types. All subsets are fixed with seed 42 (1,614 prompts in total). Decoding is greedy (temperature 0) with each model's chat template, so every configuration has a single deterministic output.
+
+\begin{table}[t]
+\centering
+\caption{Task suite. Each task type uses one dataset, a fixed random subset, and a task-appropriate metric. \texttt{max\_tokens} is the generation limit.}
+\label{tab:tasks}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lllrlr@{}}
+\toprule
+\textbf{Task type} & \textbf{Dataset} & \textbf{Prompt} & \textbf{$n$} & \textbf{Metric} & \textbf{max\_tokens} \\
+\midrule
+Arithmetic reasoning & \gsm test & zero-shot CoT, ``The answer is N'' & 250 & exact numeric match & 512 \\
+Factual QA & \trivia rc.nocontext val & closed-book short answer & 400 & normalized alias match & 32 \\
+Reading comprehension & \squad v1.1 val & passage + question, extract span & 400 & token F1 & 32 \\
+Code generation & \humaneval (all) & complete the function & 164 & pass@1 (sandboxed) & 512 \\
+Instruction following & \ifeval (300 of 541) & raw prompt & 300 & prompt-level strict acc. & 768 \\
+Creative writing & \wprompts test & $\sim$200-word story & 100 & LLM judge (1--10, rescaled) & 400 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\para{Creative-writing judge.} Each story is scored by Qwen3-8B-AWQ~\cite{yang2025qwen3} (thinking disabled, greedy decoding). The judge rates fluency, coherence, relevance and creativity on a 1--10 scale, and the score is their mean divided by 10. The judge is blind to model and precision, and it produced no parse failures.
+
+\subsection{Divergence metrics}
+\para{Task-specific KL.} For each model and task, we take the bf16 greedy responses to the first 60 items (truncated to 256 tokens) and teacher-force them through every quantized version. The KL is computed from the bf16 top-128 log-probabilities plus one lumped tail bucket. This gives a lower bound on the exact KL, which we verified to be within about 1\% of it (\eg 0.3624 vs.\ 0.3661 nats). We also record top-1 agreement with bf16.
+
+\para{Perplexity.} As the standard aggregate proxy, we compute \wikitext test perplexity on 32 windows of 1,024 tokens and report it as a ratio to bf16.
+
+\subsection{Statistical analysis}
+We report 95\% bootstrap confidence intervals (1,000 resamples over items) for every score. To test each quantized level against bf16, we use paired McNemar tests for binary metrics and paired Wilcoxon tests for F1 and judge scores. We correct the 160 resulting tests with the Benjamini--Hochberg procedure~\cite{benjamini1995controlling} at $q<0.05$. A Friedman test across models checks whether tasks differ in sensitivity, and a Spearman correlation relates log parameter count to critical precision. For H4, we compute the ROC-AUC of KL for classifying broken configurations, the Youden-optimal threshold with a bootstrap CI, and an out-of-sample check on the per-channel runs. We also run a lead-time analysis that compares KL at the last healthy precision with KL at the failing one.
+
+\para{Implementation.} Generation uses vLLM~\cite{kwon2023vllm}. Quantization is applied in place inside the vLLM worker, starting from a CPU copy of the original weights, and prefix caching is disabled. KL and perplexity use HF transformers with the same quantization code. Experiments ran on shared RTX A6000 GPUs and produced about 9.8M generated tokens, with no API cost.

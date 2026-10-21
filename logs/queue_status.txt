@@ -1,0 +1,13 @@
+Tue Oct 20 02:19:23 PM CDT 2026 qwen0.5b finished (fails=0)
+Tue Oct 20 02:22:24 PM CDT 2026 qwen1.5b finished (fails=1)
+Tue Oct 20 02:22:55 PM CDT 2026 llama1b finished (fails=2)
+Tue Oct 20 04:10:05 PM CDT 2026 qwen1.5b finished (fails=0)
+Tue Oct 20 04:16:34 PM CDT 2026 llama1b finished (fails=0)
+Tue Oct 20 05:10:47 PM CDT 2026 gen qwen3b finished
+Tue Oct 20 05:15:24 PM CDT 2026 kl qwen3b finished
+Tue Oct 20 05:19:24 PM CDT 2026 gen qwen3b-awq finished
+Tue Oct 20 05:23:00 PM CDT 2026 gen qwen7b-awq finished
+Tue Oct 20 05:39:20 PM CDT 2026 kl qwen3b finished
+Tue Oct 20 06:03:47 PM CDT 2026 kl qwen7b finished
+Tue Oct 20 06:05:13 PM CDT 2026 kl phi3mini finished
+Tue Oct 20 06:44:43 PM CDT 2026 extra done

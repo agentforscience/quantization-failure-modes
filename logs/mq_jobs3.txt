@@ -1,0 +1,11 @@
+gen qwen3b 1:9.5,2:4.6
+kl qwen3b 1:9.0,2:4.6,3:3.4,4:2.8
+gen qwen3b-awq 1:4.2,2:2.8
+gen phi3mini 1:13,2:6.5,4:3.6
+kl phi3mini 1:11,2:5.5,3:4.2,4:3.4
+gen qwen7b-awq 1:9,2:4.8,4:3.0
+gen qwen7b 1:20,2:10.5,4:5.4
+kl qwen7b 1:18,2:9.4,3:6.6,4:5.2
+gen llama8b 1:21,2:11,4:5.6
+kl llama8b 1:19,2:10,3:7,4:5.4
+gen qwen14b-awq 1:14,2:7.5,4:4.4

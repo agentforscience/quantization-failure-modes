@@ -1,0 +1,87 @@
+\section{Additional Results}
+\label{app:results}
+
+\begin{table}[h]
+\centering
+\caption{bf16 reference scores with 95\% bootstrap confidence intervals. Metrics follow \tabref{tab:tasks}. The highest score per task is in \textbf{bold}.}
+\label{tab:bf16}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Model} & \textbf{Arith.\ (\gsm)} & \textbf{Fact.\ QA (\trivia)} & \textbf{Code (\humaneval)} & \textbf{Instr.\ (\ifeval)} & \textbf{Reading (\squad)} & \textbf{Creative} \\
+\midrule
+\qwen-0.5B & 0.460 {\scriptsize [0.40,0.52]} & 0.140 {\scriptsize [0.10,0.17]} & 0.329 {\scriptsize [0.26,0.40]} & 0.260 {\scriptsize [0.21,0.31]} & 0.681 {\scriptsize [0.64,0.72]} & 0.458 {\scriptsize [0.42,0.50]} \\
+\llama-1B & 0.384 {\scriptsize [0.32,0.44]} & 0.245 {\scriptsize [0.20,0.29]} & 0.335 {\scriptsize [0.27,0.41]} & 0.410 {\scriptsize [0.36,0.47]} & 0.724 {\scriptsize [0.69,0.76]} & 0.794 {\scriptsize [0.77,0.81]} \\
+\qwen-1.5B & 0.744 {\scriptsize [0.69,0.80]} & 0.312 {\scriptsize [0.27,0.36]} & 0.591 {\scriptsize [0.52,0.66]} & 0.413 {\scriptsize [0.36,0.47]} & 0.828 {\scriptsize [0.80,0.86]} & 0.684 {\scriptsize [0.65,0.71]} \\
+\qwen-3B & 0.860 {\scriptsize [0.82,0.90]} & 0.398 {\scriptsize [0.35,0.45]} & 0.701 {\scriptsize [0.63,0.77]} & 0.603 {\scriptsize [0.55,0.65]} & 0.779 {\scriptsize [0.75,0.81]} & 0.835 {\scriptsize [0.82,0.85]} \\
+\phithree & 0.852 {\scriptsize [0.80,0.90]} & 0.542 {\scriptsize [0.49,0.59]} & 0.707 {\scriptsize [0.64,0.77]} & 0.463 {\scriptsize [0.41,0.52]} & 0.777 {\scriptsize [0.75,0.81]} & 0.810 {\scriptsize [0.80,0.82]} \\
+\qwen-7B & \textbf{0.900} {\scriptsize [0.86,0.94]} & 0.545 {\scriptsize [0.49,0.59]} & \textbf{0.829} {\scriptsize [0.77,0.88]} & \textbf{0.700} {\scriptsize [0.65,0.75]} & \textbf{0.867} {\scriptsize [0.84,0.89]} & \textbf{0.856} {\scriptsize [0.84,0.87]} \\
+\llama-8B & 0.812 {\scriptsize [0.76,0.86]} & \textbf{0.677} {\scriptsize [0.63,0.72]} & 0.671 {\scriptsize [0.60,0.74]} & 0.687 {\scriptsize [0.63,0.74]} & 0.768 {\scriptsize [0.74,0.80]} & 0.851 {\scriptsize [0.84,0.86]} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Retained fraction per model and task at 4 bits (\rtn group-128), 3 bits, and with the official \awq INT4 checkpoint (\qwen-3B/7B only). Values below 0.85 are \underline{underlined}. \awq lifts every \qwen-3B task that \rtn INT4 pushes below 0.85 back above 0.90. Results at 8, 6, 5 and 2 bits are shown in \figref{fig:retained}.}
+\label{tab:pertask}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccccccccccccccc@{}}
+\toprule
+& \multicolumn{3}{c}{\textbf{Arith.}} & \multicolumn{3}{c}{\textbf{Fact.\ QA}} & \multicolumn{3}{c}{\textbf{Code}} & \multicolumn{3}{c}{\textbf{Instr.}} & \multicolumn{3}{c}{\textbf{Reading}} & \multicolumn{3}{c}{\textbf{Creative}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16} \cmidrule(lr){17-19}
+\textbf{Model} & 4b & 3b & \awq & 4b & 3b & \awq & 4b & 3b & \awq & 4b & 3b & \awq & 4b & 3b & \awq & 4b & 3b & \awq \\
+\midrule
+\qwen-0.5B & \underline{0.66} & \underline{0.03} & -- & \underline{0.79} & \underline{0.05} & -- & \underline{0.76} & \underline{0.00} & -- & 1.00 & \underline{0.49} & -- & 0.87 & \underline{0.09} & -- & \underline{0.70} & \underline{0.45} & -- \\
+\llama-1B & 0.97 & \underline{0.17} & -- & 0.90 & \underline{0.30} & -- & 0.91 & \underline{0.15} & -- & 1.08 & \underline{0.59} & -- & \underline{0.81} & \underline{0.58} & -- & 0.98 & \underline{0.67} & -- \\
+\qwen-1.5B & 0.86 & \underline{0.05} & -- & 0.88 & \underline{0.27} & -- & \underline{0.77} & \underline{0.01} & -- & 0.99 & \underline{0.31} & -- & 0.96 & \underline{0.27} & -- & 0.97 & \underline{0.31} & -- \\
+\qwen-3B & 0.90 & \underline{0.00} & 0.95 & \underline{0.83} & \underline{0.00} & 0.94 & \underline{0.71} & \underline{0.00} & 0.91 & 0.90 & \underline{0.19} & 0.94 & \underline{0.83} & \underline{0.00} & 0.93 & 0.87 & \underline{0.14} & 0.98 \\
+\phithree & 0.96 & \underline{0.65} & -- & 0.87 & \underline{0.43} & -- & \underline{0.73} & \underline{0.10} & -- & 0.90 & \underline{0.78} & -- & 1.03 & \underline{0.79} & -- & 0.94 & \underline{0.81} & -- \\
+\qwen-7B & 0.99 & \underline{0.64} & 0.98 & 0.92 & \underline{0.67} & 0.94 & 0.99 & \underline{0.73} & 0.96 & 0.94 & \underline{0.72} & 0.98 & 0.97 & \underline{0.71} & 1.01 & 1.00 & 0.93 & 1.00 \\
+\llama-8B & 0.97 & \underline{0.73} & -- & 0.97 & \underline{0.69} & -- & 1.01 & \underline{0.62} & -- & 0.99 & 0.85 & -- & 1.01 & 0.91 & -- & 1.01 & 0.97 & -- \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{\wikitext perplexity ratio (quantized / bf16). Perplexity barely moves at 4 bits ($1.06$--$1.27\times$), even for models that lose 23--29\% on \humaneval at that precision. \qwen-3B is an outlier at 3 bits ($743\times$).}
+\label{tab:ppl}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Model} & \textbf{8 bits} & \textbf{6 bits} & \textbf{5 bits} & \textbf{4 bits} & \textbf{3 bits} & \textbf{2 bits} \\
+\midrule
+\qwen-0.5B & 1.00 & 1.01 & 1.04 & 1.21 & 4.26 & $2.5\times10^{4}$ \\
+\llama-1B & 1.00 & 1.01 & 1.04 & 1.27 & 3.46 & $2.0\times10^{4}$ \\
+\qwen-1.5B & 1.00 & 1.01 & 1.03 & 1.12 & 2.65 & $1.3\times10^{5}$ \\
+\qwen-3B & 1.00 & 1.01 & 1.02 & 1.13 & 743 & $5.3\times10^{4}$ \\
+\phithree & -- & -- & -- & 1.13 & 1.92 & -- \\
+\qwen-7B & 1.00 & 1.00 & 1.02 & 1.06 & 1.73 & $6.9\times10^{5}$ \\
+\llama-8B & 1.00 & 1.00 & 1.01 & 1.08 & 1.77 & $6.8\times10^{4}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Implementation Details}
+\label{app:impl}
+
+\para{Quantization.} \Algref{alg:quant} summarizes the group-wise round-to-nearest quantizer. When a model had to be split across GPUs with tensor parallelism, we asserted that the input dimension of every shard remained divisible by 128, so that groups matched the unsharded layout. Between precision levels, the original bf16 weights are restored from a CPU copy before the next quantization.
+
+\begin{algorithm}[h]
+\caption{Group-wise asymmetric round-to-nearest fake quantization}
+\label{alg:quant}
+\begin{algorithmic}[1]
+\Require weight matrix $\mW\in\R^{d_{\text{out}}\times d_{\text{in}}}$, bits $b$, group size $g=128$
+\For{each row $i$ and each group $G$ of $g$ consecutive input columns}
+    \State $w_{\min}\gets\min_{j\in G}\mW_{ij}$, \quad $w_{\max}\gets\max_{j\in G}\mW_{ij}$
+    \State $s\gets (w_{\max}-w_{\min})/(2^b-1)$, \quad $z\gets \mathrm{round}(-w_{\min}/s)$ \hfill \rightcomment{scale and zero point}
+    \State $q_j\gets \mathrm{clip}(\mathrm{round}(\mW_{ij}/s)+z,\,0,\,2^b-1)$ for $j\in G$ \hfill \rightcomment{integer code}
+    \State $\mW_{ij}\gets s\,(q_j-z)$ for $j\in G$ \hfill \rightcomment{de-quantize back to bf16}
+\EndFor
+\State \Return $\mW$
+\end{algorithmic}
+\end{algorithm}
+
+\para{Generation settings.} Greedy decoding with temperature 0 and seed 0, with each model's chat template. The generation limits are 512 tokens for \gsm and \humaneval, 32 for \trivia and \squad, 768 for \ifeval, and 400 for stories. Per-level generation took about 1--2 minutes for 0.5--1.5B models, about 8 minutes for 7--8B models on a 20\,GB GPU slice, and 13--33 minutes for \phithree and \qwen-3B on a busy shared GPU. Software: vLLM 0.32.0, PyTorch 2.13, transformers 5.19, Python 3.12; statistics with SciPy, statsmodels and scikit-learn.
+
+\para{KL approximation.} Using the bf16 top-128 log-probabilities plus a lumped tail bucket gives a lower bound on the exact KL. On \qwen-0.5B, the approximation matched the exact KL to within about 1\% (\eg 0.3624 vs.\ 0.3661 and 0.0929 vs.\ 0.0932 nats).

@@ -1,0 +1,5 @@
+gen qwen3b 1:9.5,2:4.4
+kl qwen3b 1:9.0,2:4.4,3:3.4,4:2.8
+gen qwen3b-awq 1:4.2,2:2.8
+gen qwen7b-awq 1:9,2:4.4,4:3.0
+gen qwen14b-awq 1:14,2:7.5,4:4.4

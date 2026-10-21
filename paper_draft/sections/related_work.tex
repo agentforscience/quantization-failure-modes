@@ -1,0 +1,14 @@
+\section{Related Work}
+\label{sec:related}
+
+\para{Post-training weight quantization.}
+\citet{dettmers2022llmint8} showed that 8-bit inference preserves quality at scale once outlier features are handled. \gptq~\cite{frantar2023gptq} uses approximate second-order information to quantize weights to 3--4 bits, and \awq~\cite{lin2024awq} protects salient channels identified from activation statistics. SmoothQuant~\cite{xiao2023smoothquant} moves activation outliers into the weights to enable joint weight--activation quantization. \citet{dettmers2023case} study the trade-off between bit width and parameter count and argue that 4 bits is close to optimal for a fixed memory budget. These papers evaluate mainly with perplexity and a few zero-shot multiple-choice tasks. We instead use the simplest quantizer, round-to-nearest (\rtn), as a pessimistic and calibration-free lower bound, and sweep it over six bit widths to locate cliffs. We use official \awq checkpoints only to check that our INT4 conclusions transfer to a production method.
+
+\para{Evaluating quantized models beyond perplexity.}
+Several studies show that quantization damage is uneven. \citet{li2024evaluating} evaluate quantized models on basic NLP, emergent abilities, trustworthiness and dialogue. \citet{jin2024comprehensive} find that 4-bit models keep most of their performance while lower precisions degrade sharply. \citet{marchisio2024quantization} find that automatic metrics understate the damage in non-Latin-script languages and that human judges notice drops that benchmarks miss. These studies mostly compare a few standard settings (\eg W8, W4, W3). Our sweep adds 6- and 5-bit points so that the cliff can be located, and it places generative tasks (code, instruction following, creative writing) under one protocol with QA tasks.
+
+\para{Distributional metrics for compressed models.}
+\citet{dutta2024accuracy} show that compressed models can match baseline accuracy while changing many individual answers (``flips''), and they recommend KL divergence and flip rates as complementary metrics. We confirm the churn they describe on generative tasks. We also go one step further and test whether task-specific KL is a \emph{leading} indicator of the accuracy cliff, \ie whether it crosses a fixed threshold one precision level before accuracy fails. We find that it does not.
+
+\para{Benchmarks.}
+Our task suite uses \gsm~\cite{cobbe2021gsm8k}, \trivia~\cite{joshi2017triviaqa}, \squad~\cite{rajpurkar2016squad}, \humaneval~\cite{chen2021humaneval}, \ifeval~\cite{zhou2023ifeval} and \wprompts~\cite{fan2018hierarchical}, together with \wikitext~\cite{merity2016pointer} perplexity. For creative writing we use an LLM judge, following \citet{zheng2023judging}.

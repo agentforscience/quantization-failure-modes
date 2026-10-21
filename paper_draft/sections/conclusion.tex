@@ -1,0 +1,6 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We mapped where weight-quantized language models break across six task types, seven models from 0.5B to 8B, and seven precisions. With weight-only group-128 round-to-nearest quantization, accuracy is flat down to 5--6 bits. At 4 bits it erodes in a task-dependent order: code is hit hardest, followed by factual QA and arithmetic, then reading and creative writing, with instruction following least affected. It collapses between 4 and 3 bits for models up to 3.8B and between 3 and 2 bits for 7--8B models. Larger models degrade more gracefully, though not monotonically. KL divergence from the bf16 model marks the collapse with a pooled threshold near 0.2--0.3 nats, but it does not anticipate the collapse, and the right threshold depends strongly on the task. The key takeaway is that \emph{the INT4 decision should be validated per task, because the failures that matter at 4 bits are fluent, silent, and invisible to perplexity}.
+
+Future work should repeat the sweep with \gptq and \awq at 2--4 bits, to test whether the task ranking survives better quantizers, and extend it to 14--70B models. It should also test KL slopes and per-task calibrated thresholds as early-warning signals, check whether \qwen-3B's fragility traces to specific outlier channels, and validate the creative-writing judge against human ratings.
